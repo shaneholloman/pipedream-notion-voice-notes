@@ -9,7 +9,7 @@ export default {
     name: "Transcribe and Summarize",
     description: "A robust workflow for transcribing and optionally summarizing audio files",
     key: "transcribe-summarize",
-    version: "0.1.77",
+    version: "0.1.78",
     type: "action",
     props: {
         instructions: {
@@ -162,7 +162,15 @@ This step works seamlessly with the **Send to Notion** step you likely see below
                 google_gemini: {
                     name: "Google Gemini",
                     recommended: "gemini-2.0-flash",
-                    models: ["gemini-2.0-flash", "gemini-2.0-flash-lite", "gemini-1.5-flash"],
+                    models: ["gemini-3.7-flash", 
+                        "gemini-3.6-flash",
+                        "gemini-3.5-flash",
+                        "gemini-3.5-flash-lite",
+                        "gemini-3.1-flash-lite",
+                        "gemini-2.5-flash-lite",
+                        "gemini-2.0-flash-lite", 
+                        "gemini-2.0-flash", 
+                        "gemini-1.5-flash"],
                     prop: "google_gemini",
                     app: {
                         type: "app",
@@ -224,7 +232,15 @@ This step works seamlessly with the **Send to Notion** step you likely see below
                 google_gemini: {
                     name: "Google Gemini",
                     recommended: "gemini-2.0-flash-lite",
-                    models: ["gemini-2.0-flash-lite", "gemini-2.0-flash", "gemini-1.5-flash"],
+                    models: ["gemini-3.7-flash", 
+                            "gemini-3.6-flash",
+                            "gemini-3.5-flash",
+                            "gemini-3.5-flash-lite",
+                            "gemini-3.1-flash-lite",
+                            "gemini-2.5-flash-lite",
+                            "gemini-2.0-flash-lite", 
+                            "gemini-2.0-flash", 
+                            "gemini-1.5-flash"],
                     prop: "google_gemini",
                     app: {
                         type: "app",
@@ -235,8 +251,8 @@ This step works seamlessly with the **Send to Notion** step you likely see below
                 },
                 groqcloud: {
                     name: "Groq",
-                    recommended: "meta-llama/llama-4-scout-17b-16e-instruct",
-                    models: ["llama-3.1-8b-instant", "llama-3.3-70b-versatile", "meta-llama/llama-4-scout-17b-16e-instruct", "openai/gpt-oss-120b", "openai/gpt-oss-20b"],
+                    recommended: "openai/gpt-oss-20b",
+                    models: ["openai/gpt-oss-120b", "openai/gpt-oss-20b"],
                     prop: "groqcloud",
                     app: {
                         type: "app",
@@ -1288,7 +1304,7 @@ This step works seamlessly with the **Send to Notion** step you likely see below
             } else {
                 const detectedLanguage = await this.detectLanguage(
                     this.ai_service,
-                    this.chat_model,
+                    this.ai_model,
                     fileInfo.metadata.paragraphs.transcript[0]
                 );
 
@@ -1399,7 +1415,7 @@ This step works seamlessly with the **Send to Notion** step you likely see below
     
                 const detectedLanguage = await this.detectLanguage(
                     this.ai_service,
-                    this.chat_model,
+                    this.ai_model,
                     fileInfo.metadata.paragraphs.transcript[0]
                 );
 
@@ -1424,7 +1440,7 @@ This step works seamlessly with the **Send to Notion** step you likely see below
                     
                     const translatedTranscript = await this.translateParagraphs({
                         service: this.ai_service,
-                        model: this.chat_model,
+                        model: this.ai_model,
                         stringsArray: groupedTranscript,
                         languageCode: this.translation_language
                     });
